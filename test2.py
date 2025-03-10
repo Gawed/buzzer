@@ -8,7 +8,7 @@ BUZZER_PIN = 17
 GPIO.setup(BUZZER_PIN, GPIO.OUT)
 
 # MQTT 设定
-MQTT_BROKER = "your_mqtt_broker_address"  # 替换为你的 MQTT 服务器地址
+MQTT_BROKER = "192.168.1.205"  # 替换为你的 MQTT 服务器地址
 MQTT_PORT = 1883  # MQTT 默认端口
 TOPIC_BUZZER_ON = "buzzer/on"
 TOPIC_BUZZER_FREQ = "buzzer/frequence"
