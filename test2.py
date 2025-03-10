@@ -2,20 +2,20 @@ import RPi.GPIO as GPIO
 import time
 import paho.mqtt.client as mqtt
 
-# GPIO 设定
+# GPIO 
 GPIO.setmode(GPIO.BCM)
 BUZZER_PIN = 17
 GPIO.setup(BUZZER_PIN, GPIO.OUT)
 
-# MQTT 设定
-MQTT_BROKER = "192.168.1.205"  # 替换为你的 MQTT 服务器地址
-MQTT_PORT = 1883  # MQTT 默认端口
+# MQTT 
+MQTT_BROKER = "192.168.1.205"  # 
+MQTT_PORT = 1883  # MQTT port
 TOPIC_BUZZER_ON = "buzzer/on"
 TOPIC_BUZZER_FREQ = "buzzer/frequence"
 
-# 默认状态
+# default
 buzzer_on = False
-buzzer_mode = 2  # 默认模式：1=3秒响3秒停, 2=1秒响1秒停, 3=一直响
+buzzer_mode = 2  
 
 def on_message(client, userdata, msg):
     global buzzer_on, buzzer_mode
@@ -28,15 +28,15 @@ def on_message(client, userdata, msg):
             buzzer_on = True
         elif payload.lower() == "off":
             buzzer_on = False
-            GPIO.output(BUZZER_PIN, GPIO.LOW)  # 立即关闭蜂鸣器
+            GPIO.output(BUZZER_PIN, GPIO.LOW)  # off
     
     elif topic == TOPIC_BUZZER_FREQ:
         if payload.isdigit():
             buzzer_mode = int(payload)
             if buzzer_mode < 1 or buzzer_mode > 3:
-                buzzer_mode = 2  # 设定默认值
+                buzzer_mode = 2  # mettre default
 
-# 连接 MQTT
+# connect mqtt
 client = mqtt.Client()
 client.on_message = on_message
 client.connect(MQTT_BROKER, MQTT_PORT, 60)
@@ -58,9 +58,9 @@ try:
                 time.sleep(0.5)
             elif buzzer_mode == 3:
                 GPIO.output(BUZZER_PIN, GPIO.HIGH)
-                time.sleep(0.1)  # 避免阻塞 MQTT
+                time.sleep(0.1)  #
         else:
-            time.sleep(0.5)  # 休眠减少 CPU 占用
+            time.sleep(0.5)  # protect CPU 
 except KeyboardInterrupt:
     pass
 finally:
