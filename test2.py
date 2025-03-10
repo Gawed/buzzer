@@ -48,14 +48,14 @@ try:
         if buzzer_on:
             if buzzer_mode == 1:
                 GPIO.output(BUZZER_PIN, GPIO.HIGH)
-                time.sleep(3)
+                time.sleep(1)
                 GPIO.output(BUZZER_PIN, GPIO.LOW)
-                time.sleep(3)
+                time.sleep(1)
             elif buzzer_mode == 2:
                 GPIO.output(BUZZER_PIN, GPIO.HIGH)
-                time.sleep(1)
+                time.sleep(0.5)
                 GPIO.output(BUZZER_PIN, GPIO.LOW)
-                time.sleep(1)
+                time.sleep(0.5)
             elif buzzer_mode == 3:
                 GPIO.output(BUZZER_PIN, GPIO.HIGH)
                 time.sleep(0.1)  # 避免阻塞 MQTT
